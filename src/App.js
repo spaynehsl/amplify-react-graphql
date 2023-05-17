@@ -49,14 +49,14 @@ const App = ({ signOut }) => {
       description: form.get("description"),
       image: image.name,
     };
-    if (!!data.image) await Storage.put(data.name, image);
+    if (data.image) await Storage.put(data.name, image);
     await API.graphql({
       query: createNoteMutation,
       variables: { input: data },
     });
     fetchNotes();
     event.target.reset();
-  }
+  }  
 
   async function deleteNote({ id, name }) {
     const newNotes = notes.filter((note) => note.id !== id);
